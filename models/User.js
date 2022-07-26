@@ -6,7 +6,7 @@ const userSchema = new Schema(
    {
       email:{
          type: String,
-         rquired: true,
+         required: true,
          trim: true,
          match:[/.+@.+\..+/, 'Please enter a valid e-mail address']
       },
