@@ -39,6 +39,46 @@ const userController = {
          console.log(err);
          res.status(500).json(err);
       })
+   },
+
+   // update an user
+   updateUser({params, body}, res) {
+      User.findByIdAndUpdate(
+         {_id:params.id},
+         body,
+         {new: true, runValidators: true}
+      )
+      .then(dbUserData => {
+         if(!dbUserData) {
+            console.log(err);
+            res.status(404).json({message:'no user with this id was detected'});
+            return;
+         }
+         res.json(dbUserData);
+      })
+      .catch(err => {
+         console.log(err);
+         res.status(500).json(err);
+      });
+   },
+
+   // delete an user
+   deleteUser({params, body}, res) {
+      User.findByIdAndDelete(
+         {_id:params.id}
+      )
+      .then(dbUserData => {
+         if(!dbUserData) {
+            console.log(err);
+            res.status(404).json({message:'no user with this id was detected'});
+            return;
+         }
+         res.json(dbUserData);
+      })
+      .catch(err => {
+         console.log(err);
+         res.status(500).json(err);
+      });
    }
 };
 
