@@ -99,6 +99,42 @@ const thoughtController = {
          console.log(err);
          res.status(500).json(err);
       })
+   },
+   // reaction controllers
+   addReaction({params, body}, res){
+      Thought.findOneAndUpdate(
+         {_id: params.thoughtId},
+         { $push: {reactions: body} },
+         {new: true, runValidator: true}
+      )
+      .then(dbThoughtData => {
+         if(!dbThoughtData){
+            return res.status(400).json({message: "No thought with this id was found!"});
+         }
+         res.json(dbThoughtData);
+      })
+      .catch(err => {
+         console.log(err);
+         res.status(500).json(err);
+      })
+   },
+   // remove reaction
+   deleteReaction({params, body}, res){
+      Thought.findOneAndUpdate(
+         {_id: params.thoughtId},
+         { $pull: {reactions: {reactionId: params.reactionId}} },
+         {new: true, runValidator: true}
+      )
+      .then(dbThoughtData => {
+         if(!dbThoughtData){
+            return res.status(400).json({message: "No thought with this id was found!"});
+         }
+         res.json(dbThoughtData);
+      })
+      .catch(err => {
+         console.log(err);
+         res.status(500).json(err);
+      })
    }
    
 };
