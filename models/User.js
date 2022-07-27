@@ -19,12 +19,19 @@ const userSchema = new Schema(
             type: Schema.Types.ObjectId,
             ref:"Thought"
          }
+      ],
+      friends: [
+         {
+            type: Schema.Types.ObjectId,
+            ref: 'User'
+         }
       ]
    },
    {
       toJSON:{
          virtuals: true
-      }
+      },
+      id: false
    }
 );
 
@@ -32,6 +39,12 @@ const userSchema = new Schema(
 userSchema.virtual('username').get(function(){
    return this.email.split('@')[0];
 });
+
+// thought count virtual.
+userSchema.virtual('thoughtCount').get(function() {
+   return this.thoughts.length;
+});
+
 
 // make the user model
 
