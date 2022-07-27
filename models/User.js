@@ -13,7 +13,13 @@ const userSchema = new Schema(
       createdAt: {
          type: Date,
          default: Date.now,
-      }
+      },
+      thoughts:[
+         {
+            type: Schema.Types.ObjectId,
+            ref:"Thought"
+         }
+      ]
    },
    {
       toJSON:{
