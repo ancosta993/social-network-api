@@ -4,10 +4,17 @@ const {Schema, model} = require('mongoose'); // import Schema and model from mon
 
 const userSchema = new Schema(
    {
+      username:{
+         type:String,
+         unique:true,
+         required:true,
+         trimmed: true
+      },
       email:{
          type: String,
          required: true,
          trim: true,
+         unique:true,
          match:[/.+@.+\..+/, 'Please enter a valid e-mail address']
       },
       createdAt: {
@@ -35,10 +42,6 @@ const userSchema = new Schema(
    }
 );
 
-// get username virtual. it will get this from user email
-userSchema.virtual('username').get(function(){
-   return this.email.split('@')[0];
-});
 
 // thought count virtual.
 userSchema.virtual('thoughtCount').get(function() {

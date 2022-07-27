@@ -18,6 +18,6 @@ router
 // add friend to user
 router
    .route('/:userId/friend/:friendId')
-   .put(addFriend)
+   .post(addFriend)
    .delete(deleteFriend)
 module.exports = router;
