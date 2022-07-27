@@ -3,11 +3,11 @@ const {User, Thought} = require('../models');
 const thoughtController = {
 
    // create thought and add to the thoughts field in the user. Take the user id from the params.
-   addThought({params, body}, res){
+   addThought({body}, res){
       Thought.create(body)
          .then(({_id}) => {
             return User.findOneAndUpdate(
-               {_id:params.userId},
+               {_id:body.userId},
                { $push: {thoughts: _id}},
                {new: true}
             )
@@ -73,15 +73,19 @@ const thoughtController = {
       })
    },
 
-   deleteThought({params, body}, res){
-      Thought.findOneAndUpdate(
+   deleteThought({params}, res){
+      Thought.findOneAndDelete(
          {_id: params.thoughtId}
       )
-      .then(() => {
-         User.findOneAndUpdate(
+      .then((dbThoughtData) => {
+         if(!dbThoughtData){
+            res.status(400).json({message:"No Thought with this id was found"});
+            return;
+         }
+         return User.findOneAndUpdate(
             {_id: params.userId},
             { $pull: {thoughts: params.thoughtId}},
-            {new:true, runValidators: true}
+            {new:true}
          )
       })
       .then(dbThoughtData => {
