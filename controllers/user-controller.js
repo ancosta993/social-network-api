@@ -1,4 +1,4 @@
-const {User} = require('../models');
+const {User, Thought} = require('../models');
 
 // create User controller
 
@@ -83,6 +83,12 @@ const userController = {
             res.status(404).json({message:'no user with this id was detected'});
             return;
          }
+         return dbUserData
+      })
+      .then(dbUserData => {
+         return Thought.deleteMany({_id:{ $in: dbUserData.thoughts}})
+      })
+      .then(dbUserData => {
          res.json(dbUserData);
       })
       .catch(err => {
