@@ -6,7 +6,18 @@ This project attempts to produce a generic API for a very simple social media ap
 ## Table of Contents
 **[Description](#description)**  
 
-**[Tools](#tools)**
+**[Tools](#tools)**  
+
+**[Directory Structure](#directory-structure)**      
+
+**[Installation Instruction](#installation-instruction)**    
+
+**[Usage](#usage)**  
+  - **[GET request](#get-request)** 
+  - **[DELETE request](#delete-request)**  
+  - **[PUT request](#put-request)**  
+  - **[POST request](#post-request)**  
+
 
 ## Tools
 The application used JavaScript in the Node.js environment.  
@@ -14,7 +25,7 @@ MongoDB was used for database. As a result, mongoose Object Document Mapper (ODM
 For serving, Express.js was used. This established the HTTP request methods for the API.
 Finally, Insomnia was used for testing all the routes and controllers.
 
-## Directory Structre
+## Directory Structure
 This application is completely backend. Therefore, there is no front-end aspects such as "public" folder.  
 The application is divided between "model, controllers, routes". There are folders for each of them.  "model" structures the data saved in the database. "controler" performs operations on the data saved in the database (create, delete, update data etc). Finally, "route" takes in the user request and decides which controller to user based on user request.
 
