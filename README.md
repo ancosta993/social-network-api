@@ -1,4 +1,5 @@
 # Social Network API
+Demo videos can be found here [Video 1](https://drive.google.com/file/d/1Vabg1zmmIbeGNoKjDpIxfA89H4tcRJMh/view), [Video 2](https://drive.google.com/file/d/1bwZIgDd0b-_Z0_eC_r9Chs5i-wgcTlox/view)
 
 ## Description
 This project attempts to produce a generic API for a very simple social media application. There are users. Users can create thoughts. Thoughts are bodies of text. Other users can react to those thoughts by replying by creating their own text bodies. Users can also make other users their friend in the application.
